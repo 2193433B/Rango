@@ -2,4 +2,5 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-	return HttpResponse("Ayy lmao welcome to the thunderdome")
+    context_dict = {'ayylmao': "Big, bold, beautiful, message!"}
+    return render(request, 'rango/index.html', context=context_dict)
