@@ -7,6 +7,8 @@ from rango.models import Category, Page
 from rango.forms import CategoryForm
 from rango.forms import PageForm
 from rango.forms import UserForm, UserProfileForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
 def index(request):
@@ -130,9 +132,15 @@ def user_login(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'rango/login.html', {})
+
+@login_required
+def restricted(request):
+    return render(request, 'rango/restricted.html')
 		
 		
-		
-		
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
 		
 		
